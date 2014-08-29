@@ -76,15 +76,12 @@ var widget = {
         viewable.style.marginRight = viewable.style.marginLeft = borderRadius * viewPort.clientHeight * 0.5 + "px";
         viewable.style.width = viewPort.clientWidth - borderRadius * viewPort.clientHeight + "px";
         container.style.paddingLeft = viewable.clientWidth + "px";
-
-        // calc animation duration (speed)
+        
+        /* setup clock refresh */
         container.innerText = (new Date()).toLocaleTimeString();
-        windows.setInterval(function() {
+        setInterval(function() {
             container.innerText = (new Date()).toLocaleTimeString();
         }, 500);
-        var speed = speedMap[config.param.speed];
-        if (speed === undefined)
-            speed = speedMap[defaults.speed];
     }
 };
 
