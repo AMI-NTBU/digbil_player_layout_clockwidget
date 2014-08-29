@@ -1,0 +1,49 @@
+<style type="text/css">
+  .textWidget {
+    white-space: nowrap;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .textWidget div{
+    height: 100%;
+  }
+  .viewable {
+    position: relative;
+    overflow: hidden;
+  }
+  .contentContainer {
+    position: absolute;
+  }
+
+  @-webkit-keyframes marquee {
+    0%   {
+      -webkit-transform: translate(0, 0);
+      transform: translate(0, 0);
+    }
+    100% {
+      -webkit-transform: translate(-100%, 0);
+      transform: translate(-100%, 0);
+    }
+  }
+  @keyframes marquee {
+    0%   {
+      -webkit-transform: translate(0, 0);
+      transform: translate(0, 0);
+    }
+    100% {
+      -webkit-transform: translate(-100%, 0);
+      transform: translate(-100%, 0);
+    }
+  }
+  .textWidget p {
+    display: inline-block;
+    margin: 0;
+    margin-right: 2em;
+  }
+</style>
+<div class='textWidget'>
+  <div class='viewable'>
+    <div class='contentContainer'></div>
+  </div>
+</div>
+

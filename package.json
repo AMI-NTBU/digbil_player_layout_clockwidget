@@ -1,0 +1,22 @@
+{
+  "name": "digbil_player_layout_clockwidget",
+  "description": "DigBil player clock widget",
+  "version": "1.0.0",
+  "author": "Renaud Sauvain",
+  "dependencies": {
+  },
+  "scripts": {
+  },
+  "keywords": [
+    "Digbil",
+    "Layout",
+    "Player",
+    "Widget",
+    "Clock"
+  ],
+  "repository": {
+    "type": "git+ssh",
+    "url": "git@github.com:digbil/digbil_player_layout_clockwidget.git"
+  },
+  "private": true
+}
