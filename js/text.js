@@ -1,14 +1,7 @@
 var config, settings, container, viewPort, viewable, colorRe = /^#([A-Fa-f0-9]{2})([A-Fa-f0-9]{2})([A-Fa-f0-9]{2})$/;
 
 var defaults = {
-    fontSize : "large",
-    speed : "normal"
-};
-
-var speedMap = {
-    slow : 80,
-    normal : 120,
-    fast : 200
+    fontSize : "large"
 };
 
 var fontSizeMap = {
@@ -75,7 +68,6 @@ var widget = {
         viewPort.style.borderRadius = borderRadius * viewPort.clientHeight + "px";
         viewable.style.marginRight = viewable.style.marginLeft = borderRadius * viewPort.clientHeight * 0.5 + "px";
         viewable.style.width = viewPort.clientWidth - borderRadius * viewPort.clientHeight + "px";
-        container.style.paddingLeft = viewable.clientWidth + "px";
         
         /* setup clock refresh */
         container.innerText = (new Date()).toLocaleTimeString();
