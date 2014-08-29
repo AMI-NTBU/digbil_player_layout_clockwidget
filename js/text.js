@@ -39,7 +39,7 @@ var widget = {
         container.style.webkitAnimation = "";
         container.style.webkitAnimationPlayState = "paused";
         config.viewPortWidth = viewPort.clientWidth + "px";
-        container.style.config.lineHeight = container.clientHeight + "px";
+        container.style.lineHeight = container.clientHeight + "px";
         container.style.fontSize = container.clientHeight * fontSizeMap[config.param["font-size"] || defaults.fontSize] + "px";
 
         var bg_color = {}, family, content = [];
