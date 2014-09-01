@@ -34,32 +34,32 @@ var widget = {
         var minute = el.select(".minute");
         var second = el.select(".second");
 
-        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || function(f) {
-            setTimeout(f, 60);
-        };
+        if (window) {
+            window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || function(f) {
+                setTimeout(f, 60);
+            };
+            if (config.param["text_color"] && config.param["text_color"].match(colorRe).length === 4) {
+                second.style["border-color"] = config.param["text_color"];
+                minute.style.background = config.param["text_color"];
+                hour.style.background = config.param["text_color"];
+            }
 
-        if (config.param["text_color"] && config.param["text_color"].match(colorRe).length === 4) {
-            second.style["border-color"] = config.param["text_color"];
-            minute.style.background = config.param["text_color"];
-            hour.style.background = config.param["text_color"];
+            function updateclock() {
+                var curdate = new Date();
+                var hour_as_degree = (curdate.getHours() + curdate.getMinutes() / 60) / 12 * 360;
+                var minute_as_degree = curdate.getMinutes() / 60 * 360;
+                var second_as_degree = (curdate.getSeconds() + curdate.getMilliseconds() / 1000) / 60 * 360;
+                hour.style['transform'] = 'rotate(' + hour_as_degree + 'deg)';
+                hour.style['-webkit-transform'] = 'rotate(' + hour_as_degree + 'deg)';
+                minute.style['transform'] = 'rotate(' + minute_as_degree + 'deg)';
+                minute.style['-webkit-transform'] = 'rotate(' + minute_as_degree + 'deg)';
+                second.style['transform'] = 'rotate(' + second_as_degree + 'deg)';
+                second.style['-webkit-transform'] = 'rotate(' + second_as_degree + 'deg)';
+                requestAnimationFrame(updateclock);
+            }
+            return updateclock();
         }
 
-        function updateclock() {
-            var curdate = new Date();
-            var hour_as_degree = (curdate.getHours() + curdate.getMinutes() / 60) / 12 * 360;
-            var minute_as_degree = curdate.getMinutes() / 60 * 360;
-            var second_as_degree = (curdate.getSeconds() + curdate.getMilliseconds() / 1000) / 60 * 360;
-            hour.style['transform'] = 'rotate(' + hour_as_degree + 'deg)';
-            hour.style['-webkit-transform'] = 'rotate(' + hour_as_degree + 'deg)';
-            minute.style['transform'] = 'rotate(' + minute_as_degree + 'deg)';
-            minute.style['-webkit-transform'] = 'rotate(' + minute_as_degree + 'deg)';
-            second.style['transform'] = 'rotate(' + second_as_degree + 'deg)';
-            second.style['-webkit-transform'] = 'rotate(' + second_as_degree + 'deg)';
-            requestAnimationFrame(updateclock);
-        }
-
-        updateclock();
-        return;
         setInterval(function() {
             var curdate = new Date();
             var hour_as_degree = (curdate.getHours() + curdate.getMinutes() / 60) / 12 * 360;
@@ -132,9 +132,10 @@ var widget = {
     }
 };
 
-window.onresize = function(event) {
-    widget.update();
-};
+if (el.onResize)
+    el.onResize(function(event) {
+        widget.update();
+    });
 
 function suffixScript() {
     el.setWidget(widget);
