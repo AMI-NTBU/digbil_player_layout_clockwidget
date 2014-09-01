@@ -30,41 +30,21 @@ var widget = {
         for ( var i = 0, len = elems.length; i < len; i++)
             elems[i].style.visibility = 'visible';
 
+        if (config.param["text_color"] && config.param["text_color"].match(colorRe).length === 4) {
+            second.style["border-color"] = config.param["text_color"];
+            minute.style.background = config.param["text_color"];
+            hour.style.background = config.param["text_color"];
+        }
+
         var hour = el.select(".hour");
         var minute = el.select(".minute");
         var second = el.select(".second");
 
-        if (window) {
-            window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || function(f) {
-                setTimeout(f, 60);
-            };
-            if (config.param["text_color"] && config.param["text_color"].match(colorRe).length === 4) {
-                second.style["border-color"] = config.param["text_color"];
-                minute.style.background = config.param["text_color"];
-                hour.style.background = config.param["text_color"];
-            }
-
-            function updateclock() {
-                var curdate = new Date();
-                var hour_as_degree = (curdate.getHours() + curdate.getMinutes() / 60) / 12 * 360;
-                var minute_as_degree = curdate.getMinutes() / 60 * 360;
-                var second_as_degree = (curdate.getSeconds() + curdate.getMilliseconds() / 1000) / 60 * 360;
-                hour.style['transform'] = 'rotate(' + hour_as_degree + 'deg)';
-                hour.style['-webkit-transform'] = 'rotate(' + hour_as_degree + 'deg)';
-                minute.style['transform'] = 'rotate(' + minute_as_degree + 'deg)';
-                minute.style['-webkit-transform'] = 'rotate(' + minute_as_degree + 'deg)';
-                second.style['transform'] = 'rotate(' + second_as_degree + 'deg)';
-                second.style['-webkit-transform'] = 'rotate(' + second_as_degree + 'deg)';
-                requestAnimationFrame(updateclock);
-            }
-            return updateclock();
-        }
-
         setInterval(function() {
             var curdate = new Date();
-            var hour_as_degree = (curdate.getHours() + curdate.getMinutes() / 60) / 12 * 360;
-            var minute_as_degree = curdate.getMinutes() / 60 * 360;
-            var second_as_degree = (curdate.getSeconds() + curdate.getMilliseconds() / 1000) / 60 * 360;
+            var hour_as_degree = curdate.getHours() * 30 + curdate.getMinutes() * 0.5;
+            var minute_as_degree = curdate.getMinutes() * 6;// / 60 * 360;
+            var second_as_degree = curdate.getSeconds() * 6;
             hour.style['transform'] = 'rotate(' + hour_as_degree + 'deg)';
             hour.style['-webkit-transform'] = 'rotate(' + hour_as_degree + 'deg)';
             minute.style['transform'] = 'rotate(' + minute_as_degree + 'deg)';
