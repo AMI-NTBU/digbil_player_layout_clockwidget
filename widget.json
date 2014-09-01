@@ -1,7 +1,10 @@
 {
   "html": "index.html",
-  "js": "js/text.js",
+  "js": "js/clock.js",
   "param": [{
+    "name": "type",
+    "default": "numeric|analogic"
+  },{
     "name": "border-radius",
     "default": "none*|light|heavy|rounded"
   }, {
