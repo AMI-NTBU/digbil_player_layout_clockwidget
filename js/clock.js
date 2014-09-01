@@ -30,15 +30,15 @@ var widget = {
         for ( var i = 0, len = elems.length; i < len; i++)
             elems[i].style.visibility = 'visible';
 
+        var hour = el.select(".hour");
+        var minute = el.select(".minute");
+        var second = el.select(".second");
+        
         if (config.param["text_color"] && config.param["text_color"].match(colorRe).length === 4) {
             second.style["border-color"] = config.param["text_color"];
             minute.style.background = config.param["text_color"];
             hour.style.background = config.param["text_color"];
         }
-
-        var hour = el.select(".hour");
-        var minute = el.select(".minute");
-        var second = el.select(".second");
 
         setInterval(function() {
             var curdate = new Date();
