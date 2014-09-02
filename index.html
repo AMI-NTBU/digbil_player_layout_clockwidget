@@ -1,12 +1,30 @@
 <style type='text/css'>
 .clockWidget {
-	white-space: nowrap;
 	height: 100%;
 	width: 100%;
-	box-sizing: border-box;
+}
+
+.background {
+	height: 100%;
+	width: 100%;
+	white-space: nowrap;
 	box-shadow: inset 0 0 10px gray;
 	overflow: hidden;
 	position: relative;
+}
+
+.text {
+	font: normal 0.8em sans-serif;
+	color: gray;
+	text-align: center;
+}
+
+.date {
+	visibility: hidden;
+	position: absolute;
+	width: 100%;
+	top: 60%;
+	z-index: -20;
 }
 
 .numeric {
@@ -17,51 +35,34 @@
 .analogic {
 	position: absolute;
 	visibility: hidden;
-	/*top: 2.5%;
-	left: 2.5%;
-	height: 95%;
-	width: 95%;	
-	overflow: hidden;
-	box-sizing: border-box;
-	box-shadow: inset 0 0 10px;*/
+	height: 200px;
+	width: 200px;
+	-webkit-transform-origin: 0% 0%; /* 109 : (500+45)*100/500 */
 }
 
 /* numeric related */
 .contentContainer {
 	height: 100%;
 	width: 100%;
-	text-align: center;
-}
-
-.clockWidget p {
-	display: inline-block;
-	margin: 2em;
-}
-
-/* Following is the analogic clock control */
-.face {
-	background: white;
-	-moz-border-radius: 100px;
-	-webkit-border-radius: 100px;
-	border-radius: 100px;
 }
 
 .clockWidget .marker { /* time markers syle */
 	content: '';
 	position: absolute;
-	height: 500%; /* to allow a distortion 5x */
 	z-index: 0;
-	left: 50%;
-	top: -495%; /* to get 5% */
 	background: gray;
-	width: 6px; /* width of all other markers */
-	margin-left: -3px /* set this value of 1/2 marker width */
+	height: 5%; /* to allow a distortion 5x */
+	width: 1%; /* width of all other markers */
+	left: 50%;
+	top: 0%; /* to get 5% */
+	margin-left: -0.5px; /* set this value of 1/2 marker width */
+	-webkit-transform-origin: 50% 1000%; /* 109 : (500+45)*100/500 */
 }
 
 .clockWidget .major { /* major markers syle */
 	background: black;
-	width: 8px; /* width of 12-6 and 3-9 markers */
-	margin-left: -4px; /* set this value of 1/2 marker width */
+	width: 2%; /* width of 12-6 and 3-9 markers */
+	margin-left: -1%; /* set this value of 1/2 marker width */
 }
 
 .clockWidget .marker.zero {
@@ -69,57 +70,46 @@
 }
 
 .clockWidget .marker.one {
-	-webkit-transform-origin: 50% 109%; /* 109 : (500+45)*100/500 */
 	-webkit-transform: rotate(30deg);
 }
 
 .clockWidget .marker.two {
-	-webkit-transform-origin: 50% 109%;
 	-webkit-transform: rotate(60deg);
 }
 
 .clockWidget .marker.three {
-	-webkit-transform-origin: 50% 109%;
 	-webkit-transform: rotate(90deg);
 }
 
 .clockWidget .marker.four {
-	-webkit-transform-origin: 50% 109%;
 	-webkit-transform: rotate(120deg);
 }
 
 .clockWidget .marker.five {
-	-webkit-transform-origin: 50% 109%;
 	-webkit-transform: rotate(150deg);
 }
 
 .clockWidget .marker.six {
-	-webkit-transform-origin: 50% 109%;
 	-webkit-transform: rotate(180deg);
 }
 
 .clockWidget .marker.seven {
-	-webkit-transform-origin: 50% 109%;
 	-webkit-transform: rotate(210deg);
 }
 
 .clockWidget .marker.eight {
-	-webkit-transform-origin: 50% 109%;
 	-webkit-transform: rotate(240deg);
 }
 
 .clockWidget .marker.nine {
-	-webkit-transform-origin: 50% 109%;
 	-webkit-transform: rotate(270deg);
 }
 
 .clockWidget .marker.ten {
-	-webkit-transform-origin: 50% 109%;
 	-webkit-transform: rotate(300deg);
 }
 
 .clockWidget .marker.eleven {
-	-webkit-transform-origin: 50% 109%;
 	-webkit-transform: rotate(330deg);
 }
 
@@ -143,17 +133,8 @@
 	box-shadow: 0 0 20px;
 }
 
-.inner_face::after {
-	content: 'digbil';
-	position: absolute;
-	width: 100%;
-	font: normal 0.8em Arial;
-	color: gray;
-	text-align: center;
-	top: 85%
-}
-
 .hand,.hand.hour {
+	z-index: 10;
 	position: absolute;
 	width: 4px; /* width of hour hand */
 	height: 30%; /* height of hour hand */
@@ -161,18 +142,15 @@
 	left: 50%;
 	margin-left: -2px; /* set this value to 1/2 width */
 	background: black;
-	-moz-transform: rotate(0deg);
-	-ms-transform: rotate(0deg);
+	-webkit-transform-origin: 50% 100%;
+	transform-origin: 50% 100%;
 	-webkit-transform: rotate(0deg);
 	transform: rotate(0deg);
-	-moz-transform-origin: bottom;
-	-ms-transform-origin: bottom;
-	-webkit-transform-origin: bottom;
-	transform-origin: bottom;
 	z-index: -1;
 	-moz-box-shadow: 0 0 3px gray;
 	-webkit-box-shadow: 0 0 3px gray;
-	box-shadow: 0 0 3px gray
+	box-shadow: 0 0 3px gray;
+	position: absolute;
 }
 
 .hand.minute {
@@ -183,32 +161,37 @@
 }
 
 .hand.second {
-	height: 50%; /* height of sec hand */
+	height: 49%; /* height of sec hand */
 	width: 2px; /* width of sec hand */
-	margin-left: -1px; /* set this value to 1/2 width */
+	margin-left: -2px; /* set this value to 1/2 width */
 	top: 0;
 	border: solid 1px;
 	background: rgba(255, 0, 0, 0);
 }
 </style>
-<div class='clockWidget face'>
-	<div class='contentContainer numeric'></div>
-	<div class='analogic marker major zerox'></div>
-	<div class='analogic marker one'></div>
-	<div class='analogic marker two'></div>
-	<div class='analogic marker major three'></div>
-	<div class='analogic marker four'></div>
-	<div class='analogic marker five'></div>
-	<div class='analogic marker major six'></div>
-	<div class='analogic marker seven'></div>
-	<div class='analogic marker eight'></div>
-	<div class='analogic marker major nine'></div>
-	<div class='analogic marker ten'></div>
-	<div class='analogic marker eleven'></div>
-	<div class='analogic inner_face'>
-		<div class='dot'></div>
-		<div class='hand hour'></div>
-		<div class='hand minute'></div>
-		<div class='hand second'></div>
+<div class='clockWidget'>
+	<div class='numeric background'>
+		<div class='contentContainer text'></div>
+	</div>
+	<div class='analogic background'>
+		<div class='marker major zerox'></div>
+		<div class='marker one'></div>
+		<div class='marker two'></div>
+		<div class='marker major three'></div>
+		<div class='marker four'></div>
+		<div class='marker five'></div>
+		<div class='marker major six'></div>
+		<div class='marker seven'></div>
+		<div class='marker eight'></div>
+		<div class='marker major nine'></div>
+		<div class='marker ten'></div>
+		<div class='marker eleven'></div>
+		<div class='inner_face'>
+			<div class='dot'></div>
+			<div class='date text'></div>
+			<div class='hand hour'></div>
+			<div class='hand minute'></div>
+			<div class='hand second'></div>
+		</div>
 	</div>
 </div>

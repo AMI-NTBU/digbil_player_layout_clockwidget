@@ -5,11 +5,14 @@
     "name": "type",
     "default": "numeric|analogic"
   },{
+  	"name": "display-date",
+  	"type": "boolean"
+  },{
     "name": "border-radius",
     "default": "none*|light|heavy|rounded"
   }, {
     "name": "font-family",
-    "default": "sans-serif|serif*|fantasy|cursive|monospace"
+    "default": "sans-serif|serif*|fantasy|cursive|monospace|arial"
   }, {
     "name": "font-size",
     "default": "full|large*|medium|small"
