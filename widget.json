@@ -4,10 +4,13 @@
   "param": [{
     "name": "type",
     "default": "numeric|analogic"
-  },{
+  }, {
   	"name": "display-date",
   	"type": "boolean"
-  },{
+  }, {
+    "name": "border",
+    "default": "none*|small|large"
+  }, {
     "name": "border-radius",
     "default": "none*|light|heavy|rounded"
   }, {

@@ -1,4 +1,4 @@
-<style type='text/css'>
+<style type="text/css">
 .clockWidget {
 	height: 100%;
 	width: 100%;
@@ -7,23 +7,26 @@
 .background {
 	height: 100%;
 	width: 100%;
-	white-space: nowrap;
-	box-shadow: inset 0 0 10px gray;
 	overflow: hidden;
 	position: relative;
+	text-align: center;
+	align: center;
 }
 
 .text {
 	font: normal 0.8em sans-serif;
+	text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 	color: gray;
 	text-align: center;
+	align: center;
 }
 
-.date {
+.date-container {
 	visibility: hidden;
 	position: absolute;
 	width: 100%;
 	top: 60%;
+	height: 30%;
 	z-index: -20;
 }
 
@@ -41,13 +44,13 @@
 }
 
 /* numeric related */
-.contentContainer {
+.timeContainer {
 	height: 100%;
 	width: 100%;
 }
 
 .clockWidget .marker { /* time markers syle */
-	content: '';
+	content: "";
 	position: absolute;
 	z-index: 0;
 	background: gray;
@@ -169,29 +172,68 @@
 	background: rgba(255, 0, 0, 0);
 }
 </style>
-<div class='clockWidget'>
-	<div class='numeric background'>
-		<div class='contentContainer text'></div>
+<div class="clockWidget">
+	<div class="numeric background">
+		<div class="timeContainer">
+			<span class="numericTime text"></span>
+		</div>
+		<div class="dateContainer">
+			<span class="numericDate text"></span>
+		</div>
 	</div>
-	<div class='analogic background'>
-		<div class='marker major zerox'></div>
-		<div class='marker one'></div>
-		<div class='marker two'></div>
-		<div class='marker major three'></div>
-		<div class='marker four'></div>
-		<div class='marker five'></div>
-		<div class='marker major six'></div>
-		<div class='marker seven'></div>
-		<div class='marker eight'></div>
-		<div class='marker major nine'></div>
-		<div class='marker ten'></div>
-		<div class='marker eleven'></div>
-		<div class='inner_face'>
-			<div class='dot'></div>
-			<div class='date text'></div>
-			<div class='hand hour'></div>
-			<div class='hand minute'></div>
-			<div class='hand second'></div>
+	<div class="analogic background">
+		<div class="marker major zerox"></div>
+		<div class="marker one"></div>
+		<div class="marker two"></div>
+		<div class="marker major three"></div>
+		<div class="marker four"></div>
+		<div class="marker five"></div>
+		<div class="marker major six"></div>
+		<div class="marker seven"></div>
+		<div class="marker eight"></div>
+		<div class="marker major nine"></div>
+		<div class="marker ten"></div>
+		<div class="marker eleven"></div>
+		<div class="inner_face">
+			<div class="dot"></div>
+			<div class="date-container">
+				<span class="date text"></span>
+			</div>
+			<div class="hand hour"></div>
+			<div class="hand minute"></div>
+			<div class="hand second"></div>
 		</div>
 	</div>
 </div>
+
+<!-- FOR TESTING PURPOSE
+<script>
+    /* simulate layout interface: for testing purpose only */
+    el = {
+        "select" : function(cfg) {
+            return document.querySelector(cfg);
+        },
+        "selectAll" : function(cfg) {
+            return document.querySelectorAll(cfg);
+        },
+        "onResize" : function(cfg) {
+            window.onresize = cfg;
+        }
+    };
+</script>
+<script src="./js/clock.js"></script>
+<script>
+    widget.update({
+        param : {
+            "type" : "analogic",
+            "display-date" : true,
+            "font-family" : "courier",
+            "text_color" : "#ff0000",
+            "bg_color" : "#00ff00",
+            //"font-size" : "small",
+            "border-radius" : "light",
+            "border" : "small"
+        }
+    });
+</script>
+-->
