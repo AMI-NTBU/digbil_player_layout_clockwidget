@@ -36,19 +36,11 @@
 	left: 0;
 }
 
-.center {
-	position: absolute;
-	height : 0px;
-	width : 0px;
-	overflow : visible;
-	top : 50%;
-	left: 50%;
-}
-
 .analogic {
+	position: absolute;
 	visibility: hidden;
-	top: -100;
-	left: -100;
+	top: 0;
+	left: 0;
 	height: 200px;
 	width: 200px;
 	-webkit-transform-origin: 0% 0%; /* 109 : (500+45)*100/500 */
@@ -192,29 +184,27 @@
 			<span class="numericDate text"></span>
 		</div>
 	</div>
-	<div class="center">
-		<div class="background analogic">
-			<div class="marker major zerox"></div>
-			<div class="marker one"></div>
-			<div class="marker two"></div>
-			<div class="marker major three"></div>
-			<div class="marker four"></div>
-			<div class="marker five"></div>
-			<div class="marker major six"></div>
-			<div class="marker seven"></div>
-			<div class="marker eight"></div>
-			<div class="marker major nine"></div>
-			<div class="marker ten"></div>
-			<div class="marker eleven"></div>
-			<div class="inner_face">
-				<div class="dot"></div>
-				<div class="date-container">
-					<span class="date text"></span>
-				</div>
-				<div class="hand hour"></div>
-				<div class="hand minute"></div>
-				<div class="hand second"></div>
+	<div class="background analogic" style="position: absolute;">
+		<div class="marker major zerox"></div>
+		<div class="marker one"></div>
+		<div class="marker two"></div>
+		<div class="marker major three"></div>
+		<div class="marker four"></div>
+		<div class="marker five"></div>
+		<div class="marker major six"></div>
+		<div class="marker seven"></div>
+		<div class="marker eight"></div>
+		<div class="marker major nine"></div>
+		<div class="marker ten"></div>
+		<div class="marker eleven"></div>
+		<div class="inner_face">
+			<div class="dot"></div>
+			<div class="date-container">
+				<span class="date text"></span>
 			</div>
+			<div class="hand hour"></div>
+			<div class="hand minute"></div>
+			<div class="hand second"></div>
 		</div>
 	</div>
 </div>
