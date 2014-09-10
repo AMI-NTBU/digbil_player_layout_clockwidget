@@ -55,12 +55,11 @@ var widget = {
         }
 
         /* adjust to clock to the viewport */
-        if (config.param['fixe-ratio'])
+        if (config.param['fixe-ratio'] && config.param['fixe-ratio'] !== "false") {
+            var size = Math.min(viewPort.clientHeight, viewPort.clientWidth);
+            analogic.style['-webkit-transform'] = 'scale(' + (size / analogic.clientWidth) + ',' + (size / analogic.clientHeight) + ')';
+        } else
             analogic.style['-webkit-transform'] = 'scale(' + (viewPort.clientWidth / analogic.clientWidth) + ',' + (viewPort.clientHeight / analogic.clientHeight) + ')';
-        else {
-            var size = Math.min(viewPort.clientHeight, analogic.clientWidth);
-            analogic.style['-webkit-transform'] = 'scale(' + (viewPort.clientWidth / size) + ',' + (viewPort.clientHeight / size) + ')';
-        }
 
         var update = function() {
             var curdate = new Date();
