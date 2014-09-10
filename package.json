@@ -1,7 +1,7 @@
 {
   "name": "digbil_player_layout_clockwidget",
   "description": "DigBil player clock widget",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "author": "Renaud Sauvain",
   "dependencies": {
   },

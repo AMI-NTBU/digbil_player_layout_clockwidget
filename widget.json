@@ -30,5 +30,8 @@
   }, {
     "name": "bg_color.alpha",
     "default": "{\"range\":{\"value\":1,\"min\":0,\"max\":1,\"step\":0.01}}"
+  }, {
+    "name": "fixe-ratio",
+    "type": "boolean"
   }]
 }

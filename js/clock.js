@@ -55,7 +55,12 @@ var widget = {
         }
 
         /* adjust to clock to the viewport */
-        analogic.style['-webkit-transform'] = 'scale(' + (viewPort.clientWidth / analogic.clientWidth) + ',' + (viewPort.clientHeight / analogic.clientHeight) + ')';
+        if (config.param['fixe-ratio'])
+            analogic.style['-webkit-transform'] = 'scale(' + (viewPort.clientWidth / analogic.clientWidth) + ',' + (viewPort.clientHeight / analogic.clientHeight) + ')';
+        else {
+            var size = Math.min(viewPort.clientHeight, analogic.clientWidth);
+            analogic.style['-webkit-transform'] = 'scale(' + (viewPort.clientWidth / ratio) + ',' + (viewPort.clientHeight / ratio) + ')';
+        }
 
         var update = function() {
             var curdate = new Date();
