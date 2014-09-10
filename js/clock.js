@@ -59,7 +59,7 @@ var widget = {
             analogic.style['-webkit-transform'] = 'scale(' + (viewPort.clientWidth / analogic.clientWidth) + ',' + (viewPort.clientHeight / analogic.clientHeight) + ')';
         else {
             var size = Math.min(viewPort.clientHeight, analogic.clientWidth);
-            analogic.style['-webkit-transform'] = 'scale(' + (viewPort.clientWidth / ratio) + ',' + (viewPort.clientHeight / ratio) + ')';
+            analogic.style['-webkit-transform'] = 'scale(' + (viewPort.clientWidth / size) + ',' + (viewPort.clientHeight / size) + ')';
         }
 
         var update = function() {
