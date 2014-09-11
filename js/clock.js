@@ -149,7 +149,7 @@ var widget = {
         /* border radius : round or square */
         var elems = el.selectAll('.background');
         for ( var i = 0, len = elems.length; i < len; i++) {
-            elems[i].style['box-shadow'] = 'inset 0 0 ' + (borderSizeMap[config.param['border'] || 'small'] * (elems[i].clientHeight || elems[i].parentNode.clientHeight)) + 'px gray';
+            elems[i].style['box-shadow'] = 'inset 0 0 ' + (borderSizeMap[config.param['border'] || 'small'] * (elems[i].clientHeight || elems[i].parentNode.clientHeight)) + 'px ' + (config.param['text_color'] || 'gray');
             if (borderRadiusMap[config.param['border-radius']])
                 elems[i].style['border-radius'] = (borderRadiusMap[config.param['border-radius']]) * viewPort.clientHeight + 'px';
             elems[i].style['background-color'] = bg_color.color || 'white';
