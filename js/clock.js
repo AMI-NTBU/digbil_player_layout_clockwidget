@@ -29,11 +29,14 @@ var borderSizeMap = {
     "large" : 0.4
 };
 
+var dayStr = [ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun' ];
+var monthStr = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
+
 var widget = {
     _initAnalog : function(config) {
         var analogic = el.select('.analogic');
-        el.select('.numeric').style.visibility = 'hidden';
-        analogic.style.visibility = 'visible';
+        el.select('.numeric').style.display = 'none';
+        analogic.style.display = 'block';
 
         var hour = el.select('.hour');
         var minute = el.select('.minute');
@@ -59,21 +62,24 @@ var widget = {
             var size = Math.min(viewPort.clientHeight, viewPort.clientWidth);
             analogic.style['-webkit-transform'] = 'scale(' + (size / analogic.clientWidth) + ',' + (size / analogic.clientHeight) + ')';
         } else
-            analogic.style['-webkit-transform'] = 'scale(' + (viewPort.clientWidth / analogic.clientWidth) + ',' + (viewPort.clientHeight / analogic.clientHeight) + ')';
+            analogic.style['-webkit-transform'] = 'scale(' + (viewPort.offsetWidth / analogic.clientWidth) + ',' + (viewPort.offsetHeight / analogic.clientHeight) + ')';
 
+        var today;
         var update = function() {
-            var curdate = new Date();
-            var hour_as_degree = curdate.getHours() * 30 + curdate.getMinutes() * 0.5;
-            var minute_as_degree = curdate.getMinutes() * 6;// / 60 * 360;
-            var second_as_degree = curdate.getSeconds() * 6;
+            var now = new Date();
+            var hour_as_degree = now.getHours() * 30 + now.getMinutes() * 0.5;
+            var minute_as_degree = now.getMinutes() * 6;// / 60 * 360;
+            var second_as_degree = now.getSeconds() * 6;
             hour.style['transform'] = 'rotate(' + hour_as_degree + 'deg)';
             hour.style['-webkit-transform'] = 'rotate(' + hour_as_degree + 'deg)';
             minute.style['transform'] = 'rotate(' + minute_as_degree + 'deg)';
             minute.style['-webkit-transform'] = 'rotate(' + minute_as_degree + 'deg)';
             second.style['transform'] = 'rotate(' + second_as_degree + 'deg)';
             second.style['-webkit-transform'] = 'rotate(' + second_as_degree + 'deg)';
-            if (date)
-                date.innerHTML = curdate.toLocaleDateString();// '<span style="font-family: monospace;">'+'</span>';
+            if (date && now.getDate() != today) {
+                today = now.getDate();
+                date.innerHTML = dayStr[now.getDay()] + ', ' + monthStr[now.getMonth()] + ' ' + today;// '<span style="font-family: monospace;">'+'</span>';
+            }
         };
 
         update();
@@ -82,8 +88,8 @@ var widget = {
         updateInterval = setInterval(update, 1000);
     },
     _initNumeric : function(config) {
-        el.select('.numeric').style.visibility = 'visible';
-        el.select('.analogic').style.visibility = 'hidden';
+        el.select('.numeric').style.display = 'block';
+        el.select('.analogic').style.display = 'none';
 
         // initialize
         if (timeField === undefined)
@@ -116,16 +122,20 @@ var widget = {
 
         /* setup clock refresh */
         var now = new Date();
-        timeField.innerHTML = now.toLocaleTimeString();
+        var today = now.getDate();
+        timeField.innerHTML = now.getHours() + ":" + ((now.getMinutes() < 10) ? '0' : '') + now.getMinutes();
         if (config.param['display-date'])
-            dateField.innerHTML = '<small>' + now.toLocaleDateString() + '</small>';
+            dateField.innerHTML = '<small>' + dayStr[now.getDay()] + ',' + monthStr[now.getMonth()] + ' ' + today + '</small>';
 
         updateInterval = setInterval(function() {
             now = new Date();
-            timeField.innerHTML = now.toLocaleTimeString();
-            if (config.param['display-date'])
-                dateField.innerHTML = '<small>' + now.toLocaleDateString() + '</small>';
-        }, 500);
+            timeField.innerHTML = now.getHours() + ":" + ((now.getMinutes() < 10) ? '0' : '') + now.getMinutes();
+            /* just avoid reconstructing the string for the date every time.. */
+            if (config.param['display-date'] && now.getDate() != today) {
+                today = now.getDate();
+                dateField.innerHTML = '<small>' + dayStr[now.getDay()] + ',' + monthStr[now.getMonth()] + ' ' + today + '</small>';
+            }
+        }, 10000);
     },
     update : function(cfg) {
         config = cfg || config || {
