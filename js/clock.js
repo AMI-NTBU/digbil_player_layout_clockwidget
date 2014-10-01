@@ -51,14 +51,14 @@ var widget = {
 
         /* set date size */
         var date;
-        if (config.param['display-date']) {
+        if (config.param['display_date']) {
             date = el.select('.date');
             date.style.visibility = "visible";
-            // date.style.fontSize = (fontSizeMap[config.param['font-size'] || defaults.fontSize]) * 30 + 'px';
+            // date.style.fontSize = (fontSizeMap[config.param['font_size'] || defaults.fontSize]) * 30 + 'px';
         }
 
         /* adjust to clock to the viewport */
-        if (config.param['fixe-ratio'] && config.param['fixe-ratio'] !== "false") {
+        if (config.param['fixe_ratio'] && config.param['fixe_ratio'] !== "false") {
             var size = Math.min(viewPort.clientHeight, viewPort.clientWidth);
             analogic.style['-webkit-transform'] = 'scale(' + (size / analogic.clientWidth) + ',' + (size / analogic.clientHeight) + ')';
         } else
@@ -100,7 +100,7 @@ var widget = {
 
         var timeContainer = el.select('.timeContainer');
 
-        if (config.param['display-date'])
+        if (config.param['display_date'])
             /* check the widget orientation */
             if (viewPort.clientHeight > viewPort.clientWidth / 4) {
                 timeContainer.style.height = "60%";
@@ -124,14 +124,14 @@ var widget = {
         var now = new Date();
         var today = now.getDate();
         timeField.innerHTML = now.getHours() + ":" + ((now.getMinutes() < 10) ? '0' : '') + now.getMinutes();
-        if (config.param['display-date'])
+        if (config.param['display_date'])
             dateField.innerHTML = '<small>' + dayStr[now.getDay()] + ',' + monthStr[now.getMonth()] + ' ' + today + '</small>';
 
         updateInterval = setInterval(function() {
             now = new Date();
             timeField.innerHTML = now.getHours() + ":" + ((now.getMinutes() < 10) ? '0' : '') + now.getMinutes();
             /* just avoid reconstructing the string for the date every time.. */
-            if (config.param['display-date'] && now.getDate() != today) {
+            if (config.param['display_date'] && now.getDate() != today) {
                 today = now.getDate();
                 dateField.innerHTML = '<small>' + dayStr[now.getDay()] + ',' + monthStr[now.getMonth()] + ' ' + today + '</small>';
             }
@@ -148,7 +148,7 @@ var widget = {
         /* back ground color */
         var bg_color = {
             'match' : config.param['bg_color'] && config.param['bg_color'].match(colorRe) || undefined,
-            'alpha' : Number(config.param['bg_color.alpha'])
+            'alpha' : Number(config.param['bg_color_alpha'])
         };
         if (bg_color.match && bg_color.match.length === 4) {
             if (bg_color.alpha === undefined || isNaN(bg_color.alpha) || bg_color.alpha > 1)
@@ -160,16 +160,16 @@ var widget = {
         var elems = el.selectAll('.background');
         for ( var i = 0, len = elems.length; i < len; i++) {
             elems[i].style['box-shadow'] = 'inset 0 0 ' + (borderSizeMap[config.param['border'] || 'small'] * Math.min(elems[i].offsetHeight || elems[i].parentNode.clientHeight, elems[i].offsetWidth || elems[i].parentNode.clientWidth)) + 'px ' + (config.param['text_color'] || 'gray');
-            if (borderRadiusMap[config.param['border-radius']])
-                elems[i].style['border-radius'] = (borderRadiusMap[config.param['border-radius']]) * viewPort.clientHeight + 'px';
+            if (borderRadiusMap[config.param['border_radius']])
+                elems[i].style['border-radius'] = (borderRadiusMap[config.param['border_radius']]) * viewPort.clientHeight + 'px';
             elems[i].style['background-color'] = bg_color.color || 'white';
         }
 
         /* init text style */
         var elems = el.selectAll('.text');
-        if (config.param['font-family'])
+        if (config.param['font_family'])
             for ( var i = 0, len = elems.length; i < len; i++)
-                elems[i].style['font-family'] = config.param['font-family'];
+                elems[i].style['font-family'] = config.param['font_family'];
 
         if (config.param['text_color'] && config.param['text_color'].match(colorRe).length === 4)
             for ( var i = 0, len = elems.length; i < len; i++)
@@ -189,7 +189,7 @@ var widget = {
             /* get the smallet ratio than shoud apply to the text */
             var ratio = Math.min(elems[i].parentNode.clientWidth / elems[i].offsetWidth, elems[i].parentNode.clientHeight / elems[i].offsetHeight);
             /* apply the ratio on the current font size + modifier */
-            var size = (Number(elems[i].style.fontSize.replace('px', '')) * ratio * fontSizeMap[config.param['font-size'] || defaults.fontSize]);
+            var size = (Number(elems[i].style.fontSize.replace('px', '')) * ratio * fontSizeMap[config.param['font_size'] || defaults.fontSize]);
             elems[i].style['font-size'] = size + 'px';
             elems[i].style['line-height'] = elems[i].parentNode.clientHeight + 'px';
             elems[i].style['text-shadow'] = size * 0.05 + 'px ' + size * 0.05 + 'px ' + size * 0.05 + 'px rgba(0, 0, 0, 0.5)';

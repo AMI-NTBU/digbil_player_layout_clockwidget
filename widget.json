@@ -5,20 +5,20 @@
     "name": "type",
     "default": "numeric*|analogic"
   }, {
-  	"name": "display-date",
-  	"type": "boolean",
+    "name": "display_date",
+    "type": "boolean",
     "default": false
   }, {
     "name": "border",
     "default": "none*|small|large"
   }, {
-    "name": "border-radius",
+    "name": "border_radius",
     "default": "none*|light|heavy|rounded"
   }, {
-    "name": "font-family",
+    "name": "font_family",
     "default": "sans-serif|serif*|fantasy|cursive|monospace|arial"
   }, {
-    "name": "font-size",
+    "name": "font_size",
     "default": "full|large*|medium|small"
   }, {
     "name": "text_color",
@@ -29,10 +29,10 @@
     "type": "color",
     "default": "#ffffff"
   }, {
-    "name": "bg_color.alpha",
+    "name": "bg_color_alpha",
     "default": "{\"range\":{\"value\":1,\"min\":0,\"max\":1,\"step\":0.01}}"
   }, {
-    "name": "fixe-ratio",
+    "name": "fixe_ratio",
     "type": "boolean",
     "default": false
   }]
