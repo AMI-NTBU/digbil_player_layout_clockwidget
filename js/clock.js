@@ -29,6 +29,8 @@ var borderSizeMap = {
     "large" : 0.4
 };
 
+var minFontSize = 8;
+
 var dayStr = [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ];
 var monthStr = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
 
@@ -189,9 +191,9 @@ var widget = {
             /* get the smallet ratio than shoud apply to the text */
             var ratio = Math.min(elems[i].parentNode.clientWidth / elems[i].offsetWidth, elems[i].parentNode.clientHeight / elems[i].offsetHeight);
             /* apply the ratio on the current font size + modifier */
-            var size = (Number(elems[i].style.fontSize.replace('px', '')) * ratio * fontSizeMap[config.param['font_size'] || defaults.fontSize]);
+            var size = (Number(elems[i].style.fontSize.replace('px', '')) * ratio * fontSizeMap[config.param['font_size'] || defaults.fontSize]) || minFontSize;
             elems[i].style['font-size'] = size + 'px';
-            elems[i].style['line-height'] = elems[i].parentNode.clientHeight + 'px';
+            elems[i].style['line-height'] = (elems[i].parentNode.clientHeight || minFontSize) + 'px';
             elems[i].style['text-shadow'] = size * 0.05 + 'px ' + size * 0.05 + 'px ' + size * 0.05 + 'px rgba(0, 0, 0, 0.5)';
         }
     }
